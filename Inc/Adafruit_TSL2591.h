@@ -151,7 +151,7 @@ tsl2591;
 bool tsl2591_begin(void);
 void tsl2591_enable(void);
 void tsl2591_disable(void);
-void tsl2591_write8( uint8_t r);
+void tsl2591_write8(uint8_t r);
 void tsl2591_write16(uint8_t r, uint8_t v);
 uint16_t tsl2591_read16(uint8_t reg);
 uint8_t tsl2591_read8(uint8_t reg);

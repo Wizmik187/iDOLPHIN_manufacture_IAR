@@ -8,6 +8,7 @@ E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\bsp_periph.p
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\cpu_bsp.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\cpu_c.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\cpu_core.pbi
+E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\ft6x06.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\lib_ascii.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\lib_math.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\lib_mem.pbi
@@ -39,6 +40,7 @@ E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32469i_di
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32469i_discovery_lcd.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32469i_discovery_qspi.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32469i_discovery_sdram.pbi
+E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32469i_discovery_ts.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32f4xx_hal.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32f4xx_hal_cortex.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32f4xx_hal_dma.pbi
@@ -66,4 +68,5 @@ E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32f4xx_ha
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32f4xx_it.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\stm32f4xx_ll_fmc.pbi
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\system_stm32f4xx.pbi
-E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\TSL2561.pbi
+E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\touchscreen.pbi
+E:\Projects\iDOLPHIN_manufacture_IAR\EWARM\iDOLPHIN_manufacture\Obj\ts_calibration.pbi

@@ -34,6 +34,8 @@ E:\Projects\iDOLPHIN_manufacture_IAR\EWARM/../Micrium/Software/uCOS-III/Source
 -I
 E:\Projects\iDOLPHIN_manufacture_IAR\EWARM/../Src/OS3
 -I
+E:\Projects\iDOLPHIN_manufacture_IAR\EWARM/../Utilities/Fonts
+-I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CMSIS\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\inc
@@ -71,6 +73,8 @@ E:\Projects\iDOLPHIN_manufacture_IAR\Micrium\Software\uCOS-III\Ports\ARM-Cortex-
 E:\Projects\iDOLPHIN_manufacture_IAR\Micrium\Software\uCOS-III\Source
 -I
 E:\Projects\iDOLPHIN_manufacture_IAR\Src\OS3
+-I
+E:\Projects\iDOLPHIN_manufacture_IAR\Utilities\Fonts
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CMSIS\Include
 -DUSE_HAL_DRIVER=1

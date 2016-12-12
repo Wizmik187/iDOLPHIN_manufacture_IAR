@@ -1208,7 +1208,10 @@
         <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\TSL2561.c</name>
+        <name>$PROJ_DIR$\..\Src\touchscreen.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\ts_calibration.c</name>
       </file>
     </group>
   </group>
@@ -1218,6 +1221,15 @@
       <name>BSP</name>
       <group>
         <name>Components</name>
+        <group>
+          <name>ft6x06</name>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\ft6x06\ft6x06.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\Drivers\BSP\Components\ft6x06\ft6x06.h</name>
+          </file>
+        </group>
         <group>
           <name>n25q128a</name>
           <file>
@@ -1271,6 +1283,12 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_sdram.h</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_ts.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Drivers\BSP\STM32469I-Discovery\stm32469i_discovery_ts.h</name>
         </file>
       </group>
       <file>

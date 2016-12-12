@@ -16,11 +16,16 @@
 */
 /**************************************************************************/
 
+
+
+
 #include <stdlib.h>
 #include <math.h>
 #include "stm32f4xx_hal.h"
 #include "Adafruit_TCS34725.h"
 #include <os.h>
+
+
 extern tcs34725 htcs34725_eval;
 extern I2C_HandleTypeDef hi2c1;
 
@@ -224,21 +229,27 @@ void tcs34725_getRawData (uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c)
     case TCS34725_INTEGRATIONTIME_2_4MS:
 		
         OSTimeDly(3, OS_OPT_TIME_DLY, &err);
+        //HAL_Delay(3);
 	break;
     case TCS34725_INTEGRATIONTIME_24MS:
     	OSTimeDly(24, OS_OPT_TIME_DLY, &err);
+        //HAL_Delay(24);
     	break;
     case TCS34725_INTEGRATIONTIME_50MS:
     	OSTimeDly(50, OS_OPT_TIME_DLY, &err);
+        //HAL_Delay(50);
     	break;
     case TCS34725_INTEGRATIONTIME_101MS:
     	OSTimeDly(101, OS_OPT_TIME_DLY, &err);
+        //HAL_Delay(101);
     	break;
     case TCS34725_INTEGRATIONTIME_154MS:
     	OSTimeDly(154, OS_OPT_TIME_DLY, &err);
+        //HAL_Delay(154);
     	break;
     case TCS34725_INTEGRATIONTIME_700MS:
     	OSTimeDly(700, OS_OPT_TIME_DLY, &err);
+        //HAL_Delay(700);
     	break;
   }
 }

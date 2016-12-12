@@ -45,12 +45,17 @@
 #include  <os.h>
 #include  <os_app_hooks.h>
 #include  <app_cfg.h>
+#include  <bsp.h>
 
-
-#include "Adafruit_TSL2591.h"
 #include "CDCE925.h"
+#include "Adafruit_TSL2591.h"
 #include "Adafruit_TCS34725.h"
+#include "stm32469i_discovery.h"
+#include "stm32469i_discovery_ts.h"
 #include "stm32469i_discovery_lcd.h"
+#include "stm32469i_discovery_sdram.h"
+#include "stm32469i_discovery_qspi.h"
+
 
 #define APP_DELAY_MS(a)   OSTimeDly(a, OS_OPT_TIME_DLY, &err)
 #define LOOP_DELAY_MS   30
@@ -108,7 +113,7 @@ static  OS_TCB Process5TCB;
 static  OS_TCB Process6TCB;
 
 
-OS_SEM  Sem1, Sem2, Sem3, Sem4;
+OS_SEM  Sem1, Sem2, Sem3, Sem4, Sem5;
 
 /* USER CODE END PV */
 
@@ -140,8 +145,6 @@ void SendSignal(void)
     static OS_TICK debounce_time = 0;
 
     OS_ERR err;
-    OS_TICK clk;
-    CPU_INT08U tmp;
     
     /* Prevent debounce effect for user key */
     if( OSTimeGet(&err) - debounce_time > 50 )
@@ -153,7 +156,7 @@ void SendSignal(void)
         return;
     }
 
-    switch(SigNum++ % 4)
+    switch(SigNum++ % 3)
     {
       case 0:
           OSSemPost(&Sem1, OS_OPT_POST_1 + OS_OPT_POST_NO_SCHED, &err);
@@ -163,9 +166,6 @@ void SendSignal(void)
       break;
       case 2:
           OSSemPost(&Sem3, OS_OPT_POST_1 + OS_OPT_POST_NO_SCHED, &err);
-      break;
-      case 3:
-          OSSemPost(&Sem4, OS_OPT_POST_1 + OS_OPT_POST_NO_SCHED, &err);
       break;
     }
     
@@ -219,7 +219,7 @@ int main(void)
   MX_QUADSPI_Init();
 
   /* USER CODE BEGIN 2 */
-   
+    BSP_IntDisAll();
     OSInit(&err);                                               /* Init uC/OS-III.                                      */
     App_OS_SetAllHooks();
     
@@ -236,6 +236,7 @@ int main(void)
                  (void       *)0,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
                  (OS_ERR     *)&err);
+    
 
     OSStart(&err);    
   /* USER CODE END 2 */
@@ -599,7 +600,6 @@ static  void  AppTaskStart (void *p_arg)
     //BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_FOREGROUND, (uint32_t) 0xC0400000);
     BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
     BSP_LCD_DisplayOn();
-    BSP_LCD_Clear(LCD_COLOR_DARKGRAY);
     tcs34725_Init();
     
     
@@ -648,6 +648,7 @@ static void AppSemCreate (void)
   OSSemCreate(&Sem2, "Sem2", (OS_SEM_CTR)0, &err);
   OSSemCreate(&Sem3, "Sem3", (OS_SEM_CTR)0, &err);
   OSSemCreate(&Sem4, "Sem4", (OS_SEM_CTR)0, &err);
+  OSSemCreate(&Sem5, "Sem5", (OS_SEM_CTR)0, &err);
 
   /* Error check */
   if(OS_ERR_NONE != err)
@@ -701,16 +702,7 @@ static  void  Process3 (void)
     CPU_INT08U cnt;
 
     while(1){
-        OSSemPend(&Sem3, 0, OS_OPT_PEND_BLOCKING, &ts, &err);
-        printf("Task3 started\r\n");
-        cnt = LOOP_DELAY_CNT;
-
-        while(cnt--)
-        {
-            BSP_LED_Toggle(LED3);
-            APP_DELAY_MS(30);
-        }
-        printf("Task3 finished\r\n");
+        Touchscreen_demo1();
     }
 }
 
@@ -718,18 +710,11 @@ static  void  Process4 (void)
 {
     OS_ERR err = OS_ERR_NONE;
     CPU_TS ts;
-    CPU_INT08U cnt;
+
 
     while(1){
+        Touchscreen_Calibration();
         OSSemPend(&Sem4, 0, OS_OPT_PEND_BLOCKING, &ts, &err);
-        printf("Task4 started\r\n");
-        cnt = LOOP_DELAY_CNT;
-        while(cnt--)
-        {
-            BSP_LED_Toggle(LED4);
-            APP_DELAY_MS(30);
-        }
-        printf("Task4 finished\r\n");
     }
 }
 
@@ -741,12 +726,11 @@ static  void  Process5 (void)
     
     while(1)
     {
-        
         tcs34725_getRawData(&r, &g, &b, &c);
         printf("%6d,%6d,%6d,%6d\r\n", r,g,b,c);
         colorTemp = tcs34725_calculateColorTemperature(r, g, b);
         Lux = (uint32_t) tcs34725_calculateLux(r, g, b);
-        
+        OSSemPost(&Sem5, OS_OPT_POST_1 + OS_OPT_POST_NO_SCHED, &err);     
     }
 }
 static  void  Process6 (void)
@@ -755,6 +739,7 @@ static  void  Process6 (void)
     CPU_TS ts;
     CPU_INT08U str[40];
     
+    BSP_LCD_Clear(LCD_COLOR_DARKGRAY);
     BSP_LCD_SetFont(&Font28);
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     BSP_LCD_FillRect(0, 0, 130, 38);
@@ -771,9 +756,7 @@ static  void  Process6 (void)
     
     while(1)
     {
-
-        
-        
+        OSSemPend(&Sem5, 0, OS_OPT_PEND_BLOCKING, &ts, &err);
         BSP_LCD_SetFont(&Font48);
         BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
         BSP_LCD_SetBackColor(LCD_COLOR_DARKGRAY);
@@ -784,14 +767,9 @@ static  void  Process6 (void)
     
         switch (htcs34725_eval._integration)
         {
-        case TCS34725_INTEGRATIONTIME_2_4MS:
-        sprintf(str, "2.4 ms");
-        break;
-        case TCS34725_INTEGRATIONTIME_24MS:
-        sprintf(str, "24 ms");
-        break;
+
         case TCS34725_INTEGRATIONTIME_50MS:
-        sprintf(str, "50 ms");
+        sprintf(str, "50 ms ");
         break;
         case TCS34725_INTEGRATIONTIME_101MS:
         sprintf(str, "101 ms");
@@ -812,10 +790,10 @@ static  void  Process6 (void)
         switch (htcs34725_eval._gain)
         {
         case TCS34725_GAIN_1X:
-        sprintf(str, "1X");
+        sprintf(str, "1X ");
         break;
         case TCS34725_GAIN_4X:
-        sprintf(str, "4X");
+        sprintf(str, "4X ");
         break;
         case TCS34725_GAIN_16X:
         sprintf(str, "16X");

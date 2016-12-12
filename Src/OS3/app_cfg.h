@@ -63,8 +63,8 @@
 #define  APP_TASK_START_PRIO                              11
 #define  APP_CFG_PROCESS1_TASK_PRIO                       12
 #define  APP_CFG_PROCESS2_TASK_PRIO                       13
-#define  APP_CFG_PROCESS3_TASK_PRIO                       14
-#define  APP_CFG_PROCESS4_TASK_PRIO                       15
+#define  APP_CFG_PROCESS3_TASK_PRIO                       18
+#define  APP_CFG_PROCESS4_TASK_PRIO                       14
 #define  APP_CFG_PROCESS5_TASK_PRIO                       16
 #define  APP_CFG_PROCESS6_TASK_PRIO                       17
 /*
